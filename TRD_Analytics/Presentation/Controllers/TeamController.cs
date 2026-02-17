@@ -1,6 +1,12 @@
-﻿namespace TRD_Analytics.Presentation;
+﻿using TRD_Analytics.Application;
 
-public class TeamController
+namespace TRD_Analytics.Presentation;
+
+public static class TeamController
 {
-    
+    public static void GetAllTeams()
+    {
+        GetAllTeamsSortedAlphUserCase useCase = new();
+        useCase.execute();
+    }
 }
