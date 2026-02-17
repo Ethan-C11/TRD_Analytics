@@ -1,39 +1,81 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using TRD_Analytics.Presentation;
 
+static int AfficherMenu(string titre, string[] options)
+{
+    int index = 0;
+    ConsoleKey touche;
+    Console.CursorVisible = false;
 
-using TRD_Analytics.Application;
-using TRD_Analytics.Presentation;
-
-string input = "";
-
-
-while(input != "q") {
-    Console.WriteLine("Veuillez choisir l'opération à effectuer");
-    Console.WriteLine("1 : Lister tout les matchs");
-    Console.WriteLine("2 : Lister toutes les équipes");
-    Console.WriteLine("3 : Lister tout les matchs d'une équipe");
-    Console.WriteLine("q : Quitter l'application");
-    input = Console.ReadLine();
-    Console.Clear();
-    switch (input)
+    do
     {
-        case "1":
+        Console.Clear();
+        Console.WriteLine($"--- {titre} ---");
+        Console.WriteLine("(Utilisez les flèches ↑↓ et Entrée)\n");
+
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (i == index)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($" > {options[i]} ");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"   {options[i]} ");
+            }
+        }
+
+        touche = Console.ReadKey(true).Key;
+
+        if (touche == ConsoleKey.UpArrow) 
+            index = (index == 0) ? options.Length - 1 : index - 1;
+        else if (touche == ConsoleKey.DownArrow) 
+            index = (index == options.Length - 1) ? 0 : index + 1;
+
+    } while (touche != ConsoleKey.Enter);
+
+    Console.CursorVisible = true;
+    return index;
+}
+
+string[] menuPrincipal = { 
+    "Lister tous les matchs", 
+    "Lister toutes les équipes", 
+    "Lister tous les matchs d'une équipe", 
+    "Quitter l'application" 
+};
+
+bool continuer = true;
+
+while (continuer)
+{
+    int choix = AfficherMenu("GESTION DES MATCHS", menuPrincipal);
+
+    Console.Clear();
+    switch (choix)
+    {
+        case 0: 
             MatchController.GetAllMatches();
             break;
-        case "2":
+        case 1: 
             TeamController.GetAllTeams();
             break;
-        case "3":
-            Console.WriteLine("Veuillez entrer le nom de l'équipe");
+        case 2: 
+            Console.Write("Veuillez entrer le nom de l'équipe : ");
             string teamName = Console.ReadLine();
             MatchController.GetAllTeamsMatches(teamName);
             break;
-        case "q":
-            return;
-        default:
-            Console.Clear();
-            Console.WriteLine("Input invalide.");
+        case 3: 
+            continuer = false;
+            Console.WriteLine("Au revoir !");
             break;
     }
-} 
 
+    if (continuer && choix != 3)
+    {
+        Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+        Console.ReadKey();
+    }
+}
