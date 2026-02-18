@@ -5,7 +5,7 @@ using TRD_Analytics.Infrastructure.Database;
 
 namespace TRD_Analytics.Presentation.Repository;
 
-public class MatchRepository
+public class MatchRepository : IMatchRepository
 {
     private readonly List<MatchEntity> _matches;
     public MatchRepository()

@@ -1,18 +1,20 @@
 ﻿using TRD_Analytics.Application;
+using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Presentation;
 
 public static class MatchController
 {
-    public static void GetAllMatches()
+    public static List<MatchDto> GetAllMatches()
     {
-        GetAllMatchesUseCase useCase = new();
-        useCase.execute();
+        GetAllMatchesUseCase useCase = new(new MatchRepository());
+        return useCase.Execute();
     }
 
-    public static void GetAllTeamsMatches(string teamName)
+    public static  List<MatchDto> GetAllTeamsMatches(string teamName)
     {
-        GetAllTeamMatchUseCase useCase = new();
-        useCase.execute(teamName);
+        GetAllTeamMatchUseCase useCase = new(new MatchRepository());
+        return useCase.Execute(teamName);
     }
 }

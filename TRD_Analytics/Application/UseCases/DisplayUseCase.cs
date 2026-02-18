@@ -2,9 +2,9 @@
 
 namespace TRD_Analytics.Application;
 
-public class DisplayUseCase
+public class DisplayUseCase : IDisplayUseCase
 {
-    public void execute<T>(List<T> inputs)
+    public void Execute<T>(List<T> inputs)
     where T : class
     {
         if (inputs == null) return;

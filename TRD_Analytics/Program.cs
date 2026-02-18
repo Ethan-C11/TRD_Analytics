@@ -1,4 +1,5 @@
-﻿using TRD_Analytics.Presentation;
+﻿using TRD_Analytics.Application;
+using TRD_Analytics.Presentation;
 
 static int AfficherMenu(string titre, string[] options)
 {
@@ -47,6 +48,8 @@ string[] menuPrincipal = {
     "Quitter l'application" 
 };
 
+IDisplayUseCase display = new DisplayUseCase();
+
 bool continuer = true;
 
 while (continuer)
@@ -57,15 +60,15 @@ while (continuer)
     switch (choix)
     {
         case 0: 
-            MatchController.GetAllMatches();
+            display.Execute(MatchController.GetAllMatches());
             break;
         case 1: 
-            TeamController.GetAllTeams();
+            display.Execute(TeamController.GetAllTeams());
             break;
         case 2: 
             Console.Write("Veuillez entrer le nom de l'équipe : ");
             string teamName = Console.ReadLine();
-            MatchController.GetAllTeamsMatches(teamName);
+            display.Execute(MatchController.GetAllTeamsMatches(teamName));
             break;
         case 3: 
             continuer = false;

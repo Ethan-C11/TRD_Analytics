@@ -1,12 +1,14 @@
 ﻿using TRD_Analytics.Application;
+using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Presentation;
 
 public static class TeamController
 {
-    public static void GetAllTeams()
+    public static List<TeamDto> GetAllTeams()
     {
-        GetAllTeamsSortedAlphUserCase useCase = new();
-        useCase.execute();
+        GetAllTeamsSortedAlphUserCase useCase = new(new TeamRepository(), new DisplayUseCase());
+        return useCase.Execute();
     }
 }

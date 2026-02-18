@@ -1,19 +1,20 @@
-﻿using TRD_Analytics.Presentation.Repository;
+﻿using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Application;
 
 public class GetAllTeamsSortedAlphUserCase
 {
-   private readonly TeamRepository _teamRepository;
-   private readonly DisplayUseCase _displayUseCase;
+   private readonly ITeamRepository _teamRepository;
+   private readonly IDisplayUseCase _displayUseCase;
 
-   public GetAllTeamsSortedAlphUserCase()
+   public GetAllTeamsSortedAlphUserCase(ITeamRepository teamRepository, IDisplayUseCase displayUseCase)
    {
-      _teamRepository = new TeamRepository();
-      _displayUseCase = new DisplayUseCase();
+      _teamRepository = teamRepository;
+      _displayUseCase = displayUseCase;
    }
-   public void execute()
+   public List<TeamDto> Execute()
    {
-      _displayUseCase.execute(_teamRepository.GetTeams());
+      return _teamRepository.GetTeams();
    }
 }

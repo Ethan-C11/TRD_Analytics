@@ -1,19 +1,18 @@
-﻿using TRD_Analytics.Presentation.Repository;
+﻿using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Application;
 
 public class GetAllMatchesUseCase
 {
 
-    private readonly MatchRepository _matchRepo;
-    private readonly DisplayUseCase _displayUseCase;
-    public GetAllMatchesUseCase()
+    private readonly IMatchRepository _matchRepo;
+    public GetAllMatchesUseCase(IMatchRepository matchRepo)
     {
-        _matchRepo = new MatchRepository();
-        _displayUseCase = new DisplayUseCase();
+        _matchRepo = matchRepo;
     }
-    public void execute()
+    public List<MatchDto> Execute()
     {
-        _displayUseCase.execute(_matchRepo.GetMatches());
+        return _matchRepo.GetMatches();
     }
 }
