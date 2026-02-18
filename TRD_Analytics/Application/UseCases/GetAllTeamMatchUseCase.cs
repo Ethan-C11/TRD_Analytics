@@ -1,4 +1,5 @@
 ﻿using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Domain.Models;
 using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Application;
@@ -12,7 +13,7 @@ public class GetAllTeamMatchUseCase
     {
         _matchRepo = matchRepo;
     }
-    public List<MatchDto> Execute(string teamName)
+    public List<MatchModel> Execute(string teamName)
     {
         teamName = teamName.ToUpper();
         var matches = _matchRepo.GetMatches();

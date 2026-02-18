@@ -1,6 +1,7 @@
 ﻿using Moq;
 using TRD_Analytics.Application;
 using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Domain.Models;
 using TRD_Analytics.Presentation.Repository;
 
 [TestClass]
@@ -19,9 +20,9 @@ public class UseCaseTests
     [TestMethod]
     public void GetAllMatchesUseCase_ShouldReturnCorrectList()
     {
-        var expectedMatches = new List<MatchDto> 
+        var expectedMatches = new List<MatchModel> 
         { 
-            new MatchDto { HomeTeam = "France", AwayTeam = "Italie" } 
+            new MatchModel { HomeTeam = "France", AwayTeam = "Italie" } 
         };
         
         _matchRepoMock.Setup(r => r.GetMatches()).Returns(expectedMatches);
@@ -38,10 +39,10 @@ public class UseCaseTests
     [TestMethod]
     public void GetAllTeamMatchUseCase_ShouldFilterByTeamName()
     {
-        var allMatches = new List<MatchDto> 
+        var allMatches = new List<MatchModel> 
         { 
-            new MatchDto { HomeTeam = "PSG", AwayTeam = "OM" },
-            new MatchDto { HomeTeam = "LENS", AwayTeam = "Lyon" }
+            new MatchModel { HomeTeam = "PSG", AwayTeam = "OM" },
+            new MatchModel { HomeTeam = "LENS", AwayTeam = "Lyon" }
         };
         _matchRepoMock.Setup(r => r.GetMatches()).Returns(allMatches);
         var useCase = new GetAllTeamMatchUseCase(_matchRepoMock.Object);

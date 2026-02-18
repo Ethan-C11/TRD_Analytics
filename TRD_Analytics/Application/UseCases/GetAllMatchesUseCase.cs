@@ -1,4 +1,5 @@
 ﻿using TRD_Analytics.Application.DTO;
+using TRD_Analytics.Domain.Models;
 using TRD_Analytics.Presentation.Repository;
 
 namespace TRD_Analytics.Application;
@@ -11,7 +12,7 @@ public class GetAllMatchesUseCase
     {
         _matchRepo = matchRepo;
     }
-    public List<MatchDto> Execute()
+    public List<MatchModel> Execute()
     {
         return _matchRepo.GetMatches();
     }

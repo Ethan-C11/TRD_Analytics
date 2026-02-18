@@ -1,14 +1,16 @@
 ﻿using TRD_Analytics.Application.DTO;
 using TRD_Analytics.Domain.Entities;
+using TRD_Analytics.Domain.Models;
+
 namespace TRD_Analytics.Application.Map;
 
 public static class MatchMappingExtensions
 {
-    public static MatchDto ToDto(this MatchEntity entity)
+    public static MatchModel ToDto(this MatchEntity entity)
     {
         if (entity == null) return null;
 
-        return new MatchDto
+        return new MatchModel
         {
             Date = entity.Date,
             HomeTeam = entity.HomeTeam,
@@ -22,9 +24,9 @@ public static class MatchMappingExtensions
         };
     }
     
-    public static List<MatchDto> ToDtoList(this IEnumerable<MatchEntity> entities)
+    public static List<MatchModel> ToDtoList(this IEnumerable<MatchEntity> entities)
     {
-        if (entities == null) return new List<MatchDto>();
+        if (entities == null) return new List<MatchModel>();
         
         return entities
             .Select(e => e.ToDto())
