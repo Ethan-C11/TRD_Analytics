@@ -6,12 +6,10 @@ namespace TRD_Analytics.Application;
 public class GetAllTeamsSortedAlphUserCase
 {
    private readonly ITeamRepository _teamRepository;
-   private readonly IDisplayUseCase _displayUseCase;
 
-   public GetAllTeamsSortedAlphUserCase(ITeamRepository teamRepository, IDisplayUseCase displayUseCase)
+   public GetAllTeamsSortedAlphUserCase(ITeamRepository teamRepository )
    {
       _teamRepository = teamRepository;
-      _displayUseCase = displayUseCase;
    }
    public List<TeamDto> Execute()
    {

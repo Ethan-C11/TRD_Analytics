@@ -8,7 +8,7 @@ public static class TeamController
 {
     public static List<TeamDto> GetAllTeams()
     {
-        GetAllTeamsSortedAlphUserCase useCase = new(new TeamRepository(), new DisplayUseCase());
+        GetAllTeamsSortedAlphUserCase useCase = new(new TeamRepository());
         return useCase.Execute();
     }
 }

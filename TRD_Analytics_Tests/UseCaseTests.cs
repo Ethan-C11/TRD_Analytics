@@ -8,14 +8,12 @@ public class UseCaseTests
 {
     private Mock<IMatchRepository> _matchRepoMock;
     private Mock<ITeamRepository> _teamRepoMock;
-    private Mock<IDisplayUseCase> _displayMock;
 
     [TestInitialize]
     public void Setup()
     {
         _matchRepoMock = new Mock<IMatchRepository>();
         _teamRepoMock = new Mock<ITeamRepository>();
-        _displayMock = new Mock<IDisplayUseCase>();
     }
 
     [TestMethod]
@@ -64,7 +62,7 @@ public class UseCaseTests
         };
         _teamRepoMock.Setup(r => r.GetTeams()).Returns(teams);
         
-        var useCase = new GetAllTeamsSortedAlphUserCase(_teamRepoMock.Object, _displayMock.Object);
+        var useCase = new GetAllTeamsSortedAlphUserCase(_teamRepoMock.Object);
 
         var result = useCase.Execute();
 
